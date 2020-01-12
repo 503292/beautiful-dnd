@@ -10,7 +10,7 @@ class App extends Component {
   state = initialData;
 
   onDragEnd = result => {
-    // const { dragCard } = this.
+    console.log(result, "result");
     const { columns } = this.state;
     const { destination, source, draggableId } = result;
     if (!destination) {
@@ -42,25 +42,20 @@ class App extends Component {
     };
 
     this.setState(newState);
-    // dragCard(
-    //   source.droppableId,
-    //   destination.droppableId,
-    //   source.index,
-    //   destination.index,
-    //   type
-    // );
   };
 
   render() {
     const { columnOrder, columns, tasks } = this.state;
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        {columnOrder.map(columnId => {
+        {
+        columnOrder.map(columnId => {
           const column = columns[columnId];
           const tasksArr = column.taskIds.map(taskId => tasks[taskId]);
 
           return <Column key={column.id} column={column} tasks={tasksArr} />;
-        })}
+        }
+        )}
       </DragDropContext>
     );
   }

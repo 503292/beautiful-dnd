@@ -9,10 +9,17 @@ const Container = styled.div`
   border: 1px solid lightgrey;
   margin-bottom: 8px;
   background-color: ${props => (props.isDragging ? "lightgrey" : "white")};
+  color: ${props => (props.isDragging ? "white" : "black")};
 `;
 
 class Task extends Component {
   state = {};
+
+  onClick = e => {
+    console.dir(e.currentTarget);
+    e.currentTarget.style.textDecoration = "line-through";
+  };
+
   render() {
     const { task, index } = this.props;
     return (
@@ -23,6 +30,7 @@ class Task extends Component {
             {...provided.dragHandleProps}
             ref={provided.innerRef}
             isDragging={snapshot.isDragging}
+            onClick={this.onClick}
           >
             <div>{task.content}</div>
           </Container>
