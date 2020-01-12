@@ -20,20 +20,25 @@ const TaskList = styled.div`
 class Column extends Component {
   state = {};
   render() {
-    const { column, tasks } = this.props;
+    const { columns } = this.props;
+    // console.log(columns["column-1"].id);
     return (
       <>
         <Container>
-          <Title>{column.title}</Title>
-          <Droppable droppableId={column.id}>
-            {provided => (
-              <TaskList ref={provided.innerRef} {...provided.droppableProps}>
-                {tasks.map((task, index) => (
-                  <Task key={task.id} task={task} index={index} />
-                ))}
-                {provided.placeholder}
-              </TaskList>
-            )}
+          <Title>{columns.title}</Title>
+
+          <Droppable droppableId={columns["column-1"].id}>
+            {provided => {
+              //   console.log("provided", provided);
+              return (
+                <TaskList ref={provided.innerRef} {...provided.droppableProps}>
+                  {columns["column-1"].tasks.map((task, index) => (
+                    <Task key={task.id} task={task} index={index} />
+                  ))}
+                  {provided.placeholder}
+                </TaskList>
+              );
+            }}
           </Droppable>
         </Container>
       </>

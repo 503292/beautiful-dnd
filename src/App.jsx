@@ -10,9 +10,11 @@ class App extends Component {
   state = initialData;
 
   onDragEnd = result => {
-    console.log(result, "result");
+    // console.log(result, "result");
     const { columns } = this.state;
     const { destination, source, draggableId } = result;
+    console.log("source.droppableId", source);
+
     if (!destination) {
       return;
     }
@@ -24,9 +26,18 @@ class App extends Component {
     }
 
     const column = columns[source.droppableId];
-    const newTaskIds = Array.from(column.taskIds);
+    console.log("column", column);
+
+    let taskIds = ["id-1", "id-2", "id-3", "id-4"];
+
+    console.log(Array.from(taskIds));
+
+    // const newTaskIds = Array.from(column.taskIds);
+    const newTaskIds = Array.from(taskIds);
     newTaskIds.splice(source.index, 1);
+    console.log(newTaskIds.splice(source.index, 1), "spl");
     newTaskIds.splice(destination.index, 0, draggableId);
+    console.log(newTaskIds.splice(destination.index, 0, draggableId), "spl222");
 
     const newColumn = {
       ...column,
@@ -45,17 +56,19 @@ class App extends Component {
   };
 
   render() {
-    const { columnOrder, columns, tasks } = this.state;
+    const { columns } = this.state;
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        {
-        columnOrder.map(columnId => {
+        {/* {console.log(columns)} */}
+        {/* {columnOrder.map(columnId => {
           const column = columns[columnId];
+          console.log(column);
           const tasksArr = column.taskIds.map(taskId => tasks[taskId]);
-
+          console.log(tasksArr);
           return <Column key={column.id} column={column} tasks={tasksArr} />;
-        }
-        )}
+        })} */}
+
+        <Column columns={columns} />
       </DragDropContext>
     );
   }

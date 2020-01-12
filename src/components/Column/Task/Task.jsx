@@ -22,6 +22,9 @@ class Task extends Component {
 
   render() {
     const { task, index } = this.props;
+    // console.log(task.id);
+    // console.log(index);
+
     return (
       <Draggable draggableId={task.id} index={index}>
         {(provided, snapshot) => (
