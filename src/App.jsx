@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Column from "./components/Column/Column";
 import { DragDropContext } from "react-beautiful-dnd";
-// , Droppable
 import "@atlaskit/css-reset";
 import "./App.css";
 import initialData from "./components/InitialData";
@@ -9,8 +8,20 @@ import initialData from "./components/InitialData";
 class App extends Component {
   state = initialData;
 
+  onDragStart = () => {
+    // document.body.style.backgroundColor = "yellow";
+    document.body.style.color = "red";
+  };
+
+  onDragUpdate = update => {
+    const { destination } = update;
+    const opacity = destination
+      ? destination.index / Object.keys(this.state.tasks).length
+      : 0;
+    document.body.style.backgroundColor = `rgba(222, 222, 222, ${opacity})`;
+  };
+
   onDragEnd = result => {
-    // const { dragCard } = this.
     const { columns } = this.state;
     const { destination, source, draggableId } = result;
     if (!destination) {
@@ -42,19 +53,17 @@ class App extends Component {
     };
 
     this.setState(newState);
-    // dragCard(
-    //   source.droppableId,
-    //   destination.droppableId,
-    //   source.index,
-    //   destination.index,
-    //   type
-    // );
+    // document.body.style.color = "black";
   };
 
   render() {
     const { columnOrder, columns, tasks } = this.state;
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
+      <DragDropContext
+        onDragStart={this.onDragStart}
+        onDragEnd={this.onDragEnd}
+        onDragUpdate={this.onDragUpdate}
+      >
         {columnOrder.map(columnId => {
           const column = columns[columnId];
           const tasksArr = column.taskIds.map(taskId => tasks[taskId]);
