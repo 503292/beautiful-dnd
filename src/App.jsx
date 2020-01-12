@@ -13,7 +13,7 @@ class App extends Component {
     // console.log(result, "result");
     const { columns } = this.state;
     const { destination, source, draggableId } = result;
-    console.log("source.droppableId", source);
+    // console.log("source.droppableId", source);
 
     if (!destination) {
       return;
@@ -25,23 +25,28 @@ class App extends Component {
       return;
     }
 
-    const column = columns[source.droppableId];
-    console.log("column", column);
+    // const column = columns[source.droppableId].tasks;
+    const tasks = columns[source.droppableId].tasks;
+    // console.log("tasks", tasks);
 
-    let taskIds = ["id-1", "id-2", "id-3", "id-4"];
+    // console.log("column", column);
+    const taskIds = tasks.map(el => el.id);
 
-    console.log(Array.from(taskIds));
+    // console.log("taskIds", taskIds);
+
+    // console.log("Array.from(taskIds)", Array.from(taskIds));
 
     // const newTaskIds = Array.from(column.taskIds);
-    const newTaskIds = Array.from(taskIds);
-    newTaskIds.splice(source.index, 1);
-    console.log(newTaskIds.splice(source.index, 1), "spl");
-    newTaskIds.splice(destination.index, 0, draggableId);
-    console.log(newTaskIds.splice(destination.index, 0, draggableId), "spl222");
+    // const newTaskIds = Array.from(taskIds);
+    taskIds.splice(source.index, 1);
+    // console.log(taskIds, "spl111");
+    taskIds.splice(destination.index, 0, draggableId);
+    // console.log(taskIds, "spl222");
 
+    //TO DO
     const newColumn = {
-      ...column,
-      taskIds: newTaskIds
+      // ...column,
+      taskIds: taskIds
     };
 
     const newState = {
