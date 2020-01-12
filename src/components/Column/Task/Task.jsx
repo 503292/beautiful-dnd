@@ -10,8 +10,8 @@ const Container = styled.div`
   margin-bottom: 8px;
   background-color: ${props =>
     props.isDragging ? "rgb(163, 206, 199)" : "white"};
+  color: ${props => (props.isDragging ? "white" : "black")};
 `;
-// color: ${props => (props.isDragging ? "white" : "black")};
 
 class Task extends Component {
   state = {};

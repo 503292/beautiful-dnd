@@ -9,8 +9,8 @@ class App extends Component {
   state = initialData;
 
   onDragStart = () => {
-    // document.body.style.backgroundColor = "yellow";
-    document.body.style.color = "red";
+    document.body.style.transition = "background-color 0.2s ease";
+    // document.body.style.color = "yellow";
   };
 
   onDragUpdate = update => {
