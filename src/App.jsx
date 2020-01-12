@@ -32,7 +32,10 @@ class App extends Component {
       ...column,
       taskIds: newTaskIds
     };
+    console.log(newColumn.id, "id");
+    console.log(newColumn, "fff");
 
+    console.log(columns, "columns");
     const newState = {
       ...this.state,
       columns: {
@@ -48,14 +51,12 @@ class App extends Component {
     const { columnOrder, columns, tasks } = this.state;
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        {
-        columnOrder.map(columnId => {
+        {columnOrder.map(columnId => {
           const column = columns[columnId];
           const tasksArr = column.taskIds.map(taskId => tasks[taskId]);
 
           return <Column key={column.id} column={column} tasks={tasksArr} />;
-        }
-        )}
+        })}
       </DragDropContext>
     );
   }
