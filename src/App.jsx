@@ -10,10 +10,8 @@ class App extends Component {
   state = initialData;
 
   onDragEnd = result => {
-    // console.log(result, "result");
     const { columns } = this.state;
     const { destination, source, draggableId } = result;
-    // console.log("source.droppableId", source);
 
     if (!destination) {
       return;
@@ -25,43 +23,59 @@ class App extends Component {
       return;
     }
 
-    // const column = columns[source.droppableId].tasks;
     const tasks = columns[source.droppableId].tasks;
-    // console.log("tasks", tasks);
 
-    // console.log("column", column);
     const taskIds = tasks.map(el => el.id);
 
-    // console.log("taskIds", taskIds);
-
-    // console.log("Array.from(taskIds)", Array.from(taskIds));
-
-    // const newTaskIds = Array.from(column.taskIds);
-    // const newTaskIds = Array.from(taskIds);
     taskIds.splice(source.index, 1);
     // console.log(taskIds, "spl111");
     taskIds.splice(destination.index, 0, draggableId);
     // console.log(taskIds, "spl222");
 
-    //TO DO
-    const newColumn = {
-      // ...column,
-      taskIds: taskIds
-    };
+    let tasks2 = Object.assign({}, columns["column-1"].tasks);
+    console.log(tasks2, "tasks2");
 
-    const newState = {
-      ...this.state,
-      columns: {
-        ...columns,
-        [newColumn.id]: newColumn
+    let tmpTasksArr = [];
+
+    for (let i = 0; i < taskIds.length; i++) {
+      for (let j = 0; j < taskIds.length; j++) {
+        if (taskIds[i] === tasks2[j].id) {
+          tmpTasksArr.push(tasks2[j]);
+        }
       }
-    };
+    }
+    // console.log(tmpTasksArr);
 
-    this.setState(newState);
+    // console.log(tasks, "tasks");
+
+    //TO DO
+    this.setState({
+      columns: {
+        "column-1": { tasks: tmpTasksArr }
+      }
+    });
+
+    // const newColumn = {
+    //  ...tasks: tmpTasksArr
+    // };
+    // console.log(newColumn, "newColumn");
+    // // console.log(newColumn, "newColumn.id");
+    // const newState = {
+    //   ...this.state,
+    //   columns: {
+    //     ...columns,
+    //     [newColumn.id]: newColumn
+    //   }
+    // };
+
+    // console.log(newState, "newState");
+
+    // this.setState(newState);
   };
 
   render() {
     const { columns } = this.state;
+    console.log(columns, "columns2");
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         {/* {console.log(columns)} */}
