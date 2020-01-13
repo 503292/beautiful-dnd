@@ -40,6 +40,7 @@ class App extends Component {
         if (taskIds[i] === tasks2[j].id) {
           tmpTasksArr.push(tasks2[j]);
         }
+
       }
     }
 
