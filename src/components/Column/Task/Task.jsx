@@ -10,20 +10,19 @@ const Container = styled.div`
   margin-bottom: 8px;
   background-color: ${props => (props.isDragging ? "lightgrey" : "white")};
   color: ${props => (props.isDragging ? "white" : "black")};
+  font-weight: ${props => (props.isDragging ? "700" : "400")};
 `;
 
 class Task extends Component {
   state = {};
 
   onClick = e => {
-    console.dir(e.currentTarget);
-    e.currentTarget.style.textDecoration = "line-through";
+    // console.dir(e.currentTarget);
+    // e.currentTarget.style.textDecoration = "line-through";
   };
 
   render() {
     const { task, index } = this.props;
-    // console.log(task.id);
-    // console.log(index);
 
     return (
       <Draggable draggableId={task.id} index={index}>
