@@ -10,12 +10,13 @@ class App extends Component {
   state = initialData;
 
   onDragEnd = result => {
-    console.log(result, "result");
     const { columns } = this.state;
     const { destination, source, draggableId } = result;
+
     if (!destination) {
       return;
     }
+
     if (
       source.droppableId === destination.droppableId &&
       source.index === destination.index
@@ -23,40 +24,39 @@ class App extends Component {
       return;
     }
 
-    const column = columns[source.droppableId];
-    const newTaskIds = Array.from(column.taskIds);
-    newTaskIds.splice(source.index, 1);
-    newTaskIds.splice(destination.index, 0, draggableId);
+    const tasks = columns[source.droppableId].tasks;
 
-    const newColumn = {
-      ...column,
-      taskIds: newTaskIds
-    };
-    console.log(newColumn.id, "id");
-    console.log(newColumn, "fff");
+    const taskIds = tasks.map(el => el.id);
 
-    console.log(columns, "columns");
-    const newState = {
-      ...this.state,
-      columns: {
-        ...columns,
-        [newColumn.id]: newColumn
+    taskIds.splice(source.index, 1);
+    taskIds.splice(destination.index, 0, draggableId);
+
+    let tasks2 = Object.assign({}, columns["column-1"].tasks);
+
+    let tmpTasksArr = [];
+
+    for (let i = 0; i < taskIds.length; i++) {
+      for (let j = 0; j < taskIds.length; j++) {
+        if (taskIds[i] === tasks2[j].id) {
+          tmpTasksArr.push(tasks2[j]);
+        }
+
       }
-    };
+    }
 
-    this.setState(newState);
+    this.setState({
+      columns: {
+        "column-1": { tasks: tmpTasksArr, id: "column-1", title: "today" }
+      }
+    });
   };
 
   render() {
-    const { columnOrder, columns, tasks } = this.state;
+    const { columns } = this.state;
+    console.log(columns, "columns2");
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        {columnOrder.map(columnId => {
-          const column = columns[columnId];
-          const tasksArr = column.taskIds.map(taskId => tasks[taskId]);
-
-          return <Column key={column.id} column={column} tasks={tasksArr} />;
-        })}
+        <Column columns={columns} />
       </DragDropContext>
     );
   }
