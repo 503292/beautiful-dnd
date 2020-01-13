@@ -10,6 +10,7 @@ const Container = styled.div`
   margin-bottom: 8px;
   background-color: ${props => (props.isDragging ? "lightgrey" : "white")};
   color: ${props => (props.isDragging ? "white" : "black")};
+  font-weight: ${props => (props.isDragging ? "700" : "400")};
 `;
 
 class Task extends Component {
@@ -27,6 +28,7 @@ class Task extends Component {
 
   render() {
     const { task, index } = this.props;
+
     return (
       <Draggable draggableId={task.id} index={index}>
         {(provided, snapshot) => (
