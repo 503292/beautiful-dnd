@@ -10,7 +10,6 @@ class App extends Component {
   state = initialData;
 
   onDragEnd = result => {
-    console.log(result, "result");
     const { columns } = this.state;
     const { destination, source, draggableId } = result;
     if (!destination) {
@@ -32,10 +31,7 @@ class App extends Component {
       ...column,
       taskIds: newTaskIds
     };
-    console.log(newColumn.id, "id");
-    console.log(newColumn, "fff");
 
-    console.log(columns, "columns");
     const newState = {
       ...this.state,
       columns: {

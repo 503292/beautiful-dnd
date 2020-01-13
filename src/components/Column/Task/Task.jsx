@@ -16,8 +16,13 @@ class Task extends Component {
   state = {};
 
   onClick = e => {
-    console.dir(e.currentTarget);
-    e.currentTarget.style.textDecoration = "line-through";
+    // cheched text through
+    //
+    // if (e.target.style.cssText === "") {
+    //   e.target.style.textDecoration = "line-through";
+    // } else {
+    //   e.target.style.textDecoration = "";
+    // }
   };
 
   render() {

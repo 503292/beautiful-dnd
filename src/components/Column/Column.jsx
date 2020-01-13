@@ -6,9 +6,10 @@ import Task from "./Task/Task";
 import styled from "styled-components";
 
 const Container = styled.div`
-  margin: 5px;
+  margin: 5px auto;
   border: 2px solid lightgrey;
   border-radius: 2px;
+  width: 300px;
 `;
 const Title = styled.h3`
   padding: 8px;
