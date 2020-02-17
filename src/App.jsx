@@ -4,10 +4,24 @@ import { DragDropContext } from "react-beautiful-dnd";
 // , Droppable
 import "@atlaskit/css-reset";
 import "./App.css";
-import initialData from "./components/InitialData";
+
+const initialState = {
+  columns: {
+    "column-1": {
+      id: "column-1",
+      title: "today",
+      tasks: [
+        { id: "id-1", content: "1take out the car1" },
+        { id: "id-2", content: "2take out the car2" },
+        { id: "id-3", content: "3take out the car3" },
+        { id: "id-4", content: "4take out the car4" }
+      ]
+    }
+  }
+};
 
 class App extends Component {
-  state = initialData;
+  state = initialState;
 
   onDragEnd = result => {
     const { columns } = this.state;
@@ -40,7 +54,6 @@ class App extends Component {
         if (taskIds[i] === tasks2[j].id) {
           tmpTasksArr.push(tasks2[j]);
         }
-
       }
     }
 
