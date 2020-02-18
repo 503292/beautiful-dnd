@@ -16,16 +16,6 @@ const Container = styled.div`
 class Task extends Component {
   state = {};
 
-  onClick = e => {
-    // cheched text through
-    //
-    // if (e.target.style.cssText === "") {
-    //   e.target.style.textDecoration = "line-through";
-    // } else {
-    //   e.target.style.textDecoration = "";
-    // }
-  };
-
   render() {
     const { task, index } = this.props;
 
